@@ -1,5 +1,15 @@
 package ru.job4j.concurrent;
 
+/**
+ * Метод показывает состояние нитей в разные периоды
+ * производиться вывод данных о названии  и состоянии работы нити
+ * Так же идет вывод в консоль о завершении  жизни нитей и их состоянии
+ * Пометка при перенесении методов start() внутрь цикла можем получить
+ * IllegalThreadStateException
+ *
+ * @Kolesnikov Evgeniy
+ * @version  1.0
+ */
 public class ThreadState {
     public static void main(String[] args) {
         Thread first = new Thread(
