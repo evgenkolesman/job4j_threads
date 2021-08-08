@@ -6,13 +6,12 @@ public class ThreadState {
                 () -> { });
         Thread second = new Thread(
                 () -> { });
-
+        second.start();
+        first.start();
         System.out.println(second.getName());
         System.out.println(first.getName());
         while (second.getState() != Thread.State.TERMINATED
                 || first.getState() != Thread.State.TERMINATED) {
-            second.start();
-            first.start();
             System.out.println(second.getState());
             System.out.println(first.getState());
         }
