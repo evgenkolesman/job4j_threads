@@ -1,11 +1,10 @@
 package ru.job4j.concurrent;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ForTestTest extends ConcurrentOutput {
+class ForTestTest {
 
     @Test
     public void forTestTest() {
