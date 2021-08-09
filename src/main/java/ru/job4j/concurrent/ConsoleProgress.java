@@ -18,7 +18,7 @@ public class ConsoleProgress implements Runnable {
                     Thread.sleep(100);
                 }
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                //e.printStackTrace(); для задания 3.1
                 Thread.currentThread().interrupt();
             }
         }
