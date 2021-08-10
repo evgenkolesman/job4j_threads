@@ -7,17 +7,17 @@ import java.net.URL;
 
 /**
  * This class reads data from
+ *
+ * @version 1.0
  * @url = args[0]
  * with speed
  * @speed = args[1]
  * and writes it in the result file
  * path is in run method may be changed in different ways
  * we may use not class either record
- *
  * @Kolesnikov Evgeniy
- * @version 1.0
  */
-public class Wget implements Runnable{
+public class Wget implements Runnable {
 
     private final String url;
     private final int speed;
@@ -51,7 +51,8 @@ public class Wget implements Runnable{
             while ((bytesRead = in.read(dataBuffer, 0, speed)) != -1) {
                 fileOutputStream.write(dataBuffer, 0, bytesRead);
                 if (speed > 1024) {
-                Thread.sleep(15); }
+                    Thread.sleep(15);
+                }
             }
         } catch (IOException | InterruptedException e) {
             Thread.currentThread().interrupt();
