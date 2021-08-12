@@ -50,13 +50,15 @@ public class Wget implements Runnable {
             int bytesRead;
             long beginTime = System.currentTimeMillis();
             while ((bytesRead = in.read(dataBuffer, 0, speed)) != -1) {
-                fileOutputStream.write(dataBuffer, 0, bytesRead);
                 long endTime = System.currentTimeMillis();
-                if (endTime - beginTime > 630) {
-                    Thread.sleep(endTime - beginTime);
+                if (endTime - beginTime < speed) {
+                    Thread.sleep(speed - (endTime - beginTime));
                 }
+                fileOutputStream.write(dataBuffer, 0, bytesRead);
             }
+
         } catch (IOException | InterruptedException e) {
+
             Thread.currentThread().interrupt();
         }
     }
