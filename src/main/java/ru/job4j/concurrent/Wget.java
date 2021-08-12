@@ -48,10 +48,12 @@ public class Wget implements Runnable {
              FileOutputStream fileOutputStream = new FileOutputStream("src/main/java/ru/job4j/concurrent/result.html")) {
             byte[] dataBuffer = new byte[speed];
             int bytesRead;
+            long beginTime = System.currentTimeMillis();
             while ((bytesRead = in.read(dataBuffer, 0, speed)) != -1) {
                 fileOutputStream.write(dataBuffer, 0, bytesRead);
-                if (speed > 1024) {
-                    Thread.sleep(15);
+                long endTime = System.currentTimeMillis();
+                if (endTime - beginTime > 630) {
+                    Thread.sleep(endTime - beginTime);
                 }
             }
         } catch (IOException | InterruptedException e) {
