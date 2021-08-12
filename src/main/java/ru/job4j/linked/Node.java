@@ -4,7 +4,6 @@ package ru.job4j.linked;
  * Immutable object
  * @param <T>
  *
- *author
  */
 public class Node<T> {
     private final Node<T> next;
