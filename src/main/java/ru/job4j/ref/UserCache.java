@@ -24,9 +24,8 @@ public class UserCache {
     }
 
     public List<User> findAll() {
-        List<User> list = users.values().stream()
+        return users.values().stream()
                 .map(a -> User.of(a.getName())) // аналогично как в прошлом методе делаем вызов копий и мапим их
-                .collect(Collectors.toList()); // смысл такой мы создаем список с копиями
-        return list;
+                .collect(Collectors.toList()); // копия листа, что бы не было задвоений
     }
 }
