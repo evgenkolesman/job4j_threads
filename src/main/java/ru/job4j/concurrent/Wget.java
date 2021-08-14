@@ -53,6 +53,7 @@ public class Wget implements Runnable {
                 long endTime = System.currentTimeMillis();
                 if (endTime - beginTime < speed) {
                     Thread.sleep(speed - (endTime - beginTime));
+                    beginTime = System.currentTimeMillis();
                 }
                 fileOutputStream.write(dataBuffer, 0, bytesRead);
             }
