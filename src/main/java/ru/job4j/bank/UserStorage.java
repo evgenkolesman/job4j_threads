@@ -3,50 +3,56 @@ package ru.job4j.bank;
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * It`s threadsafe method
+ * can add, update, delete User
+ * and can make transfer operation between users
+ *
+ *@author Kolesnikov Evgeniy
+ *@version 1.0
+ */
 @ThreadSafe
 public class UserStorage {
 
     @GuardedBy("this")
     private final ConcurrentHashMap<Integer, User> users = new ConcurrentHashMap<>();
-    private final AtomicInteger id = new AtomicInteger();
 
-    boolean add(User user) {
-        users.put(id.incrementAndGet(), User.of(user.getId(), user.getAmount()));
+    synchronized boolean add(User user) {
+        users.putIfAbsent(user.getId(), user);
         return users.containsValue(user);
     }
 
-    boolean update(User user) {
+    synchronized boolean update(User user) {
         boolean flag = false;
-        User userUpdate = users.get(user.getId());
-        if (userUpdate != null) {
-            users.put(user.getId(), user);
+        if (users.containsKey(user.getId())) {
+            users.replace(user.getId(), user);
             flag = true;
         }
         return flag;
     }
 
-    boolean delete(User user) {
-        if (users.contains(user)) {
-            users.remove(user);
-            return true;
-        } else {
-            return false;
-        }
+    synchronized boolean delete(User user) {
+        return users.remove(user.getId(), user);
     }
 
-    public User findById(int id) {
+    synchronized public User findById(int id) {
         return User.of(users.get(id).getId(), users.get(id).getAmount());
     }
 
-    void transfer(int fromId, int toId, int amount) {
-        User sourceFrom = findById(fromId);
-        User sourceTo = findById(toId);
-        sourceTo.setAmount(sourceTo.getAmount() + amount);
-        sourceFrom.setAmount(sourceFrom.getAmount() - amount);
+    synchronized void transfer(int fromId, int toId, int amount) {
+        if (!Objects.equals(users.get(fromId), null)
+                && !Objects.equals(users.get(toId), null)) {
+            User sourceFrom = findById(fromId);
+            User sourceTo = findById(toId);
+            if (amount > sourceFrom.getAmount()) {
+                System.out.println("It`s not enough money for transfer");
+            } else {
+                sourceTo.setAmount(sourceTo.getAmount() + amount);
+                sourceFrom.setAmount(sourceFrom.getAmount() - amount);
+            }
+        }
     }
-
-
 }
