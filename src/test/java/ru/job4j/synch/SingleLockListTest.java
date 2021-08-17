@@ -11,7 +11,7 @@ import java.util.TreeSet;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
-class SingleLockListTest extends ConcurrentOutput {
+public class SingleLockListTest extends ConcurrentOutput {
 
     @Test
     public void add() throws InterruptedException {
