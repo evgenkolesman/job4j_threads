@@ -28,8 +28,7 @@ public class UserStorage {
     synchronized User get(int id) {
         if (users.contains(users.get(id))) {
             return users.get(id);
-        }
-        else {
+        } else {
             return null;
         }
     }
