@@ -20,21 +20,17 @@ public class UserStorage {
     @GuardedBy("this")
     private final ConcurrentHashMap<Integer, User> users = new ConcurrentHashMap<>();
 
-    synchronized User add(User user) {
-        return users.putIfAbsent(user.getId(), user);
+    synchronized boolean add(User user) {
+        return users.putIfAbsent(user.getId(), user) == null;
     }
 
     // по логике должен быть такой
-    synchronized User get(int id) {
-        if (users.contains(users.get(id))) {
-            return users.get(id);
-        } else {
-            return null;
-        }
+    synchronized boolean get(int id) {
+            return users.get(id) != null;
     }
 
-    synchronized User update(User user) {
-        return users.replace(user.getId(), user);
+    synchronized boolean update(User user) {
+        return users.replace(user.getId(), user) != null;
     }
 
     synchronized boolean delete(User user) {
