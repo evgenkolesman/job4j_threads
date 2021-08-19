@@ -31,7 +31,7 @@ public class SimpleBlockingQueue<T> {
         queue.add(value);
     }
 
-    public synchronized T poll(){
+    public synchronized T poll() {
         while (queue.size() == 0) {
             try {
                 wait();
