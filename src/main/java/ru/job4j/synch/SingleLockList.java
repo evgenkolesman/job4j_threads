@@ -12,11 +12,11 @@ import java.util.*;
  */
 @ThreadSafe
 public class SingleLockList<T> implements Iterable<T> {
-    @GuardedBy(("this"))
+    @GuardedBy("this")
     private final List<T> list;
 
     public SingleLockList(List<T> list) {
-        this.list = (List<T>) copy(new ArrayList<>(list));
+        this.list = (List) copy(list);
     }
 
     public synchronized void add(T value) {
@@ -33,7 +33,6 @@ public class SingleLockList<T> implements Iterable<T> {
     }
 
     private Iterable<T> copy(List<T> list) {
-        List<T> listIt = list;
-        return listIt;
+        return new ArrayList<>(list);
     }
 }
