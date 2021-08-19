@@ -17,9 +17,13 @@ public class SimpleBlockingQueue<T> {
         this.limit = limit;
     }
 
-    public synchronized void offer(T value) throws InterruptedException {
+    public synchronized void offer(T value) {
         while (queue.size() == limit) {
-            wait();
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         if (queue.size() == 0) {
             notifyAll();
@@ -27,9 +31,13 @@ public class SimpleBlockingQueue<T> {
         queue.add(value);
     }
 
-    public synchronized T poll() throws InterruptedException {
+    public synchronized T poll(){
         while (queue.size() == 0) {
-            wait();
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         if (queue.size() == limit) {
             notifyAll();

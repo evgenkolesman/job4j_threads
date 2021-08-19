@@ -19,14 +19,10 @@ public class Consumer<T> extends Thread {
         }
     }
 
-    public T consume() {
+    public T consume() throws InterruptedException {
         T t = null;
-        try {
-            System.out.println("Consumer object: " + queue.poll());
-            t = (T) queue.poll();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    return t;
+        System.out.println("Consumer object: " + queue.poll());
+        t = (T) queue.poll();
+        return t;
     }
 }
