@@ -10,7 +10,6 @@ public class ParallelSearch {
                 () -> {
                     while (true) {
                         System.out.println(queue.poll());
-
                     }
                 }
         );
@@ -29,10 +28,6 @@ public class ParallelSearch {
                 }
 
         ).start();
-        try {
-            consumer.wait();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
     }
 }

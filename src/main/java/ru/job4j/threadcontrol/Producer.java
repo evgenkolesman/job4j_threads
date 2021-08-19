@@ -12,13 +12,9 @@ public class Producer implements Runnable {
     @Override
     public void run() {
         while (true) {
-            try {
-                int a = valueRandom();
-                queue.offer(a);
+            int a = valueRandom();
+            queue.offer(a);
 
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
     }
 
