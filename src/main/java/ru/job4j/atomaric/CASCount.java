@@ -13,7 +13,6 @@ public class CASCount {
         do {
             a = count.get();
         } while (a != count.compareAndExchange(a, a + 1));
-
     }
 
     public int getVal() {

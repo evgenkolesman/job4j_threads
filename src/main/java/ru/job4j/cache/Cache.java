@@ -19,12 +19,12 @@ public class Cache {
     }
 
     public boolean update(Base model) {
-        if (!Objects.equals(model.getVersion(), memory.get(model.getId()).getVersion())) {
-            throw new OptimisticException("No value in cache");
-        } else {
-            Base modelUpdate = new Base(model.getId(), model.getVersion() + 1);
-            return memory.replace(modelUpdate.getId(), modelUpdate) != null;
-        }
+        return memory.computeIfPresent(model.getId(), (a, b) -> {
+            if (!Objects.equals(model.getVersion(), memory.get(model.getId()).getVersion())) {
+                throw new OptimisticException("No value in cache");
+            }
+            return  new Base(model.getId(), model.getVersion() + 1);
+        }) != null;
     }
 
     public void delete(Base model) {
