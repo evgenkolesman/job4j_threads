@@ -33,13 +33,13 @@ public class CacheTest {
         cache.update(model1);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void deleteTest() {
         Cache cache = new Cache();
         Base model = new Base(1, 0);
         cache.add(model);
         cache.delete(model);
         Base model1 = new Base(1, 0);
-        cache.update(model1);
+        assertFalse(cache.update(model1));
     }
 }
