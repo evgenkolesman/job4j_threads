@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.FileReader;
 
 public class Input {
-    public int readContent(File file) {
+    public synchronized int readContent(File file) {
         int a = 0;
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
             a = in.read();

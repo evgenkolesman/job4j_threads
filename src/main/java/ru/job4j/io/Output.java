@@ -16,7 +16,7 @@ public class Output {
     }
 
 
-    public void saveContent(String content) {
+    public  synchronized void saveContent(String content) {
         try (BufferedWriter out = new BufferedWriter(
                 new OutputStreamWriter(new FileOutputStream(file)))) {
             for (int i = 0; i < content.length(); i += 1) {

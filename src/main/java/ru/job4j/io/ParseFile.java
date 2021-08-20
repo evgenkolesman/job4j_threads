@@ -21,23 +21,24 @@ public class ParseFile {
         this.file = file;
     }
 
-    public String getContent() {
+    public synchronized String getContent() {
         Predicate<Character> filter = (s -> s > 0);
         return content(filter);
     }
 
-    public String getContentWithoutUnicode() {
-        Predicate<Character> filter = (s -> s > 0 && s < 0x80);
+    public synchronized String getContentWithoutUnicode() {
+        Predicate<Character> filter = (s -> s < 0x80);
         return content(filter);
     }
 
-    private String content(Predicate<Character> filter) {
+    private synchronized String content(Predicate<Character> filter) {
         StringBuilder output = new StringBuilder();
         Input io = new Input();
-        int data = io.readContent(file);
-        while (filter.test((char) data)) {
-            output.append((char) data);
-
+        int data ;
+        while ((data = io.readContent(file)) > 0) {
+            if (filter.test((char) data)) {
+                output.append((char) data);
+            }
         }
         return output.toString();
     }
