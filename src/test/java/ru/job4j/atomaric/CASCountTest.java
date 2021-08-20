@@ -29,6 +29,6 @@ public class CASCountTest {
         second.join();
         third.join();
 
-        assertThat(casCount.getVal(), is(26));
+        assertThat(casCount.getVal(), is(27));
     }
 }
