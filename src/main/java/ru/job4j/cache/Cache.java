@@ -19,7 +19,7 @@ public class Cache {
     }
 
     public boolean update(Base model) {
-        if(!Objects.equals(model.getVersion(), memory.get(model.getId()).getVersion())) {
+        if (!Objects.equals(model.getVersion(), memory.get(model.getId()).getVersion())) {
             throw new OptimisticException("No value in cache");
         } else {
             Base modelUpdate = new Base(model.getId(), model.getVersion() + 1);

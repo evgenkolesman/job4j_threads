@@ -7,14 +7,14 @@ import static org.junit.Assert.*;
 public class CacheTest {
 
     @Test
-    public void addTest(){
+    public void addTest() {
         Cache cache = new Cache();
         Base model = new Base(1, 0);
         assertTrue(cache.add(model));
     }
 
     @Test
-    public void updateTest(){
+    public void updateTest() {
         Cache cache = new Cache();
         Base model = new Base(1, 0);
         model.setName("a");
@@ -25,7 +25,7 @@ public class CacheTest {
     }
 
     @Test(expected = OptimisticException.class)
-    public void updateTestWhenException(){
+    public void updateTestWhenException() {
         Cache cache = new Cache();
         Base model = new Base(1, 0);
         cache.add(model);
