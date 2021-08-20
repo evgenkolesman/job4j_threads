@@ -14,12 +14,12 @@ public class CASCountTest {
     public void incrementTest() throws InterruptedException {
 
         CASCount casCount = new CASCount();
-        Thread first = new Thread( () ->
-            IntStream.range(1, 8).forEach(a -> casCount.increment()));
-        Thread second = new Thread( () ->
-                IntStream.range(0,10).forEach(a -> casCount.increment()));
-        Thread third = new Thread( () ->
-                IntStream.range(1,10).forEach(a -> casCount.increment()));
+        Thread first = new Thread(() ->
+                IntStream.range(1, 8).forEach(a -> casCount.increment()));
+        Thread second = new Thread(() ->
+                IntStream.range(0, 10).forEach(a -> casCount.increment()));
+        Thread third = new Thread(() ->
+                IntStream.range(1, 10).forEach(a -> casCount.increment()));
 
         first.start();
         second.start();
