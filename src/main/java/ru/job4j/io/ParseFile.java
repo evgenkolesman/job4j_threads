@@ -33,7 +33,6 @@ public class ParseFile {
 
     private synchronized String content(Predicate<Character> filter) {
         StringBuilder output = new StringBuilder();
-
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
             int data;
             while ((data = in.read()) > 0) {
