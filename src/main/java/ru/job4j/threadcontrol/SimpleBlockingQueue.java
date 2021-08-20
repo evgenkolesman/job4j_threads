@@ -25,9 +25,7 @@ public class SimpleBlockingQueue<T> {
                 e.printStackTrace();
             }
         }
-        if (queue.size() == 0) {
-            notifyAll();
-        }
+        notifyAll();
         queue.add(value);
     }
 
@@ -39,13 +37,11 @@ public class SimpleBlockingQueue<T> {
                 e.printStackTrace();
             }
         }
-        if (queue.size() == limit) {
-            notifyAll();
-        }
+        notifyAll();
         return queue.remove();
     }
 
     public boolean isEmpty() {
-        return  queue.size() == 0;
+        return queue.size() == 0;
     }
 }

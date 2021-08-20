@@ -18,8 +18,8 @@ public class SimpleBlockingQueueTest {
         Thread consumer = new Thread(new Consumer(q));
         consumer.start();
         producer.start();
-        producer.join(10000);
-        consumer.join(10000);
+        producer.join(1000);
+        consumer.join(1000);
     }
 
     @Test
