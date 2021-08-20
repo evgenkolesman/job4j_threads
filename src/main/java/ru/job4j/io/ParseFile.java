@@ -27,18 +27,24 @@ public class ParseFile {
     }
 
     public synchronized String getContentWithoutUnicode() {
-        Predicate<Character> filter = (s -> s < 0x80);
+        Predicate<Character> filter = (s -> s > 0x80 && s != '\u0000');
         return content(filter);
     }
 
     private synchronized String content(Predicate<Character> filter) {
         StringBuilder output = new StringBuilder();
-        Input io = new Input();
-        int data ;
-        while ((data = io.readContent(file)) > 0) {
-            if (filter.test((char) data)) {
-                output.append((char) data);
+
+        try (BufferedReader in = new BufferedReader(new FileReader(file))) {
+            int data;
+            while ((data = in.read()) > 0) {
+                if (filter.test((char) data)) {
+                    output.append((char) data);
+                } else {
+                    return output.toString();
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return output.toString();
     }
