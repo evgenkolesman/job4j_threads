@@ -20,7 +20,6 @@ public class ThreadPoolTest {
     private final int size = Runtime.getRuntime().availableProcessors();
 
     @Test
-
     public void workTest() {
         List<Runnable> list = new ArrayList<>();
         List<Integer> listCount = new ArrayList<>();
@@ -47,8 +46,8 @@ public class ThreadPoolTest {
 //        assertThat(listCount.get(listCount.size() - 1), is(1));
     }
 
-    @Test
 
+    @Test
     public void whenMoreThanSize() {
         Set<String> set = new LinkedHashSet<>();
         ThreadPool threadPool = new ThreadPool();
