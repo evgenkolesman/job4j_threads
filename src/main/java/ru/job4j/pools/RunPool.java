@@ -8,19 +8,16 @@ public class RunPool {
         int[] arr1 = {1, 3, 2, 4, 5, 6, 7, 8, 9, 10, 12, 11};
 
         Arrays.stream(choseArrayAndSort(arr)).forEach(System.out::print);
-        System.out.println("");
-        ;
+        System.out.print(System.lineSeparator());
         Arrays.stream(choseArrayAndSort(arr1)).forEach(System.out::print);
     }
 
     public static int[] choseArrayAndSort(int[] arr) {
         int[] res;
         if (arr.length <= 10) {
-            MergeSort mergeSort = new MergeSort();
-            res = mergeSort.sort(arr);
+            res = MergeSort.sort(arr);
         } else {
-            ParallelMergeSort parallelMergeSort = new ParallelMergeSort(arr, arr[0], arr[arr.length - 1]);
-            res = parallelMergeSort.sort(arr);
+            res = ParallelMergeSort.sort(arr);
         }
         return res;
     }
