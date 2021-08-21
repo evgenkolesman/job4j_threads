@@ -17,7 +17,6 @@ public class EmailNotification {
             System.out.println(subject);
             System.out.println(body);
         }));
-        ;
     }
 
     public void close() {

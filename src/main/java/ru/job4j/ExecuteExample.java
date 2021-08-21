@@ -31,7 +31,7 @@ public class ExecuteExample {
             }
         }
         System.out.println("Execute " + Thread.currentThread().getName());
-        System.out.println( Runtime.getRuntime().availableProcessors());
+        System.out.println(Runtime.getRuntime().availableProcessors());
     }
-    }
+}
 
