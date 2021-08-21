@@ -49,7 +49,7 @@ public class ThreadPoolTest {
     public void whenMoreThanSize() {
         Set<String> set = new LinkedHashSet<>();
         ThreadPool threadPool = new ThreadPool();
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 100; i++) {
             threadPool.work(() -> {
                 String name = Thread.currentThread().getName();
                 System.out.println(name + "Working");
