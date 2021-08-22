@@ -3,9 +3,17 @@ package ru.job4j.emailnotification;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * Teamplate of class
+ * which will do email notification
+ * writes notification in console for test
+ *
+ * @author Kolesnikov Evgeniy
+ * @version 1.0
+ */
 public class EmailNotification {
 
-    ExecutorService executorService = Executors.newFixedThreadPool(
+    private final ExecutorService executorService = Executors.newFixedThreadPool(
             Runtime.getRuntime().availableProcessors()
     );
 
@@ -21,6 +29,13 @@ public class EmailNotification {
 
     public void close() {
         executorService.shutdown();
+        while (!executorService.isTerminated()) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void send(String subject, String body, String email) {
