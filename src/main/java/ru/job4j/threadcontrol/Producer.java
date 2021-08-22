@@ -13,7 +13,11 @@ public class Producer implements Runnable {
     public void run() {
         while (true) {
             int a = valueRandom();
-            queue.offer(a);
+            try {
+                queue.offer(a);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
         }
     }

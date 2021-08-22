@@ -34,7 +34,11 @@ public class ThreadPoolTest {
         }
 
         for (Runnable job : list) {
-            threadPool.work(job);
+            try {
+                threadPool.work(job);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         threadPool.shutdown();
 //        assertThat(list.size(), is(12)); // это число может быть любым просто выявил количество потоков которое может работать одновременно
@@ -47,11 +51,15 @@ public class ThreadPoolTest {
         Set<String> set = new LinkedHashSet<>();
         ThreadPool threadPool = new ThreadPool();
         for (int i = 0; i < 100; i++) {
-            threadPool.work(() -> {
-                String name = Thread.currentThread().getName();
-                System.out.println(name + "Working");
-                set.add(name);
-            });
+            try {
+                threadPool.work(() -> {
+                    String name = Thread.currentThread().getName();
+                    System.out.println(name + "Working");
+                    set.add(name);
+                });
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         threadPool.shutdown();
         //assertThat(set.size(), is(12));

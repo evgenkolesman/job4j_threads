@@ -8,19 +8,20 @@ public class ParallelSearch {
         SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<Integer>(10);
         final Thread consumer = new Thread(
                 () -> {
-
                     while (!Thread.currentThread().isInterrupted()) {
-
+                        try {
                             System.out.println(queue.poll());
-
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
         consumer.start();
         Thread second = new Thread(
                 () -> {
                     for (int index = 0; index != 3; index++) {
-                        queue.offer(index);
                         try {
+                            queue.offer(index);
                             Thread.sleep(500);
                         } catch (InterruptedException e) {
                             Thread.currentThread().interrupt();
