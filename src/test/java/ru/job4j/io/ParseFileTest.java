@@ -21,7 +21,7 @@ public class ParseFileTest {
     public void parsingWithOutUnicode() {
         ParseFile parseFile = new ParseFile(
                 new File("src/main/java/ru/job4j/io/Test.txt"));
-        assertThat(parseFile.getContentWithoutUnicode(), is("Привет"));
+        assertThat(parseFile.getContentWithoutUnicode(), is("Приветменторы"));
     }
 
 }

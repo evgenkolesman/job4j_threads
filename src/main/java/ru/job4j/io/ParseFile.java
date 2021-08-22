@@ -38,8 +38,6 @@ public class ParseFile {
             while ((data = in.read()) > 0) {
                 if (filter.test((char) data)) {
                     output.append((char) data);
-                } else {
-                    return output.toString();
                 }
             }
         } catch (Exception e) {
