@@ -15,7 +15,7 @@ public class RolColSum {
 
 
         Thread a = new Thread(()-> {
-            System.out.println(Sum.asyncSum(matrix)[0]);});
+            System.out.println(Sum.getTask(matrix));});
         a.start();
         a.join();
     }
@@ -57,12 +57,19 @@ class Sum {
         return colSum1;
     }
 
-    public static int [] asyncSum(int[][] matrix) {
-        int[] arr = new int[2];
-        CompletableFuture<Void> all = CompletableFuture.allOf(() -> {
+//    public static int [] asyncSum(int[][] matrix) {
+//        int[] arr = new int[2];
+//        CompletableFuture<Void> all = CompletableFuture.any(() -> {
+//            arr[0]=Sum.colSum(matrix);
+//            arr[1] = Sum.rowSum(matrix);});
+//        return arr;
+//    }
+
+    public static CompletableFuture<int[]> getTask (int[][] matrix) {
+        return CompletableFuture.supplyAsync(() -> { int[] arr = new int[2];
             arr[0]=Sum.colSum(matrix);
-            arr[1] = Sum.rowSum(matrix);});
-        return arr;
+            arr[1] = Sum.rowSum(matrix);
+        return arr;});
     }
 }
 
