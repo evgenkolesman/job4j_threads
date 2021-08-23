@@ -1,6 +1,7 @@
 package ru.job4j.pools;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 public class RolColSum {
     public static void main(String[] args) throws InterruptedException {
@@ -15,7 +16,14 @@ public class RolColSum {
 
 
         Thread a = new Thread(()-> {
-            System.out.println(Sum.getTask(matrix));});
+            try {
+                System.out.println(Sum.getTask(matrix).get()[1]);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        });
         a.start();
         a.join();
     }
