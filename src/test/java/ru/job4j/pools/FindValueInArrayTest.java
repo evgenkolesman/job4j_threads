@@ -5,11 +5,11 @@ import org.junit.Test;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-public class FindValueInArrayTest  {
+public class FindValueInArrayTest {
 
     @Test
     public void whenLengthLessTen() {
-        int[] arr = {1,2,3};
+        int[] arr = {1, 2, 3};
         int val = 3;
 
         assertThat(FindValueInArray.find(arr, val), is(2));
@@ -17,8 +17,8 @@ public class FindValueInArrayTest  {
 
     @Test
     public void whenLengthMoreTen() {
-        int [] arr = new int[12];
-        for (int i = 0; i <12; i++) {
+        int[] arr = new int[12];
+        for (int i = 0; i < 12; i++) {
             arr[i] = i;
         }
         int val = 3;

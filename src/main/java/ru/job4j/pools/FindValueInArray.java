@@ -18,7 +18,6 @@ public class FindValueInArray extends RecursiveTask<Integer> {
     }
 
     static int findMethod(int[] arr, int value) {
-//      AtomicInteger res = new AtomicInteger();
         var res = -1;
         for (var i = 0; i < arr.length; i++) {
             if (arr[i] == value) {
@@ -30,12 +29,12 @@ public class FindValueInArray extends RecursiveTask<Integer> {
 
     @Override
     protected Integer compute() {
-        if(arr.length <= 10) {
+        if (arr.length <= 10) {
             return findMethod(arr, value);
         }
-        int mid = (arr.length-1)/2;
+        int mid = (arr.length - 1) / 2;
         FindValueInArray findValueInArray1 = new FindValueInArray(arr, value, to, mid);
-        FindValueInArray findValueInArray2 = new FindValueInArray(arr, value, mid +1, from);
+        FindValueInArray findValueInArray2 = new FindValueInArray(arr, value, mid + 1, from);
         findValueInArray1.fork();
         findValueInArray2.fork();
         return Math.max(findValueInArray1.join(), findValueInArray2.join());
