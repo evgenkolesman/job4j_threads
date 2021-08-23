@@ -12,23 +12,28 @@ public class RolColSum {
                 matrix[i][z] = z;
             }
         }
-        System.out.println(Sum.colSum(matrix));
-        System.out.println(Sum.rowSum(matrix));
+//        System.out.println(Sum.colSum(matrix));
+//        System.out.println(Sum.rowSum(matrix));
+        System.out.println(Sum.colSum(matrix) + Sum.rowSum(matrix));
+        try {
+            System.out.println(Sum.getTask(matrix).get()[0]);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
 
-
-        Thread a = new Thread(()-> {
-            try {
-                System.out.println(Sum.getTaskRowSum(matrix).get());
-                System.out.println(Sum.getTaskСolSum(matrix).get());
-                System.out.println(Sum.getTask(matrix).get());// пока дает сумму массива а не поотдельности данные
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-        });
-        a.start();
-        a.join();
+//        Thread a = new Thread(() -> {
+//            try {
+////                System.out.println(Sum.getTaskRowSum(matrix).get());
+////                System.out.println(Sum.getTaskСolSum(matrix).get());
+//                System.out.println(Sum.getTask(matrix).get()[0]);// пока дает сумму массива а не поотдельности данные
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            } catch (ExecutionException e) {
+//                e.printStackTrace();
+//            }
+//        });
+//        a.start();
+//        a.join();
     }
 }
 
@@ -76,17 +81,19 @@ class Sum {
 //        return arr;
 //    }
 
-    public static CompletableFuture<int[]> getTask (int[][] matrix) {
-        return CompletableFuture.supplyAsync(() -> { int[] arr = new int[2];
-            arr[0]=Sum.colSum(matrix);
+    public static CompletableFuture<int[]> getTask(int[][] matrix) {
+        return CompletableFuture.supplyAsync(() -> {
+            int[] arr = new int[2];
+            arr[0] = Sum.colSum(matrix);
             arr[1] = Sum.rowSum(matrix);
-        return arr;});
+            return arr;
+        });
     }
 
-    public static CompletableFuture<Integer> getTaskСolSum (int[][] matrix) {
-        return CompletableFuture.supplyAsync(() -> {
-            return Sum.colSum(matrix);});
-    }
+//    public static CompletableFuture<Integer> getTaskСolSum (int[][] matrix) {
+//        return CompletableFuture.supplyAsync(() -> {
+//            return Sum.colSum(matrix);});
+//    }
 
 //    public static CompletableFuture<Void> getTaskRowSum (int[][] matrix) {
 //        return CompletableFuture.runAsync(() -> {
