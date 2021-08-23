@@ -1,5 +1,6 @@
 package ru.job4j.pools;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -17,7 +18,9 @@ public class RolColSum {
 
         Thread a = new Thread(()-> {
             try {
-                System.out.println(Sum.getTask(matrix).get()[1]);
+                System.out.println(Sum.getTaskRowSum(matrix).get());
+                System.out.println(Sum.getTaskСolSum(matrix).get());
+                System.out.println(Sum.getTask(matrix).get());// пока дает сумму массива а не поотдельности данные
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
@@ -79,6 +82,20 @@ class Sum {
             arr[1] = Sum.rowSum(matrix);
         return arr;});
     }
+
+    public static CompletableFuture<Integer> getTaskСolSum (int[][] matrix) {
+        return CompletableFuture.supplyAsync(() -> {
+            return Sum.colSum(matrix);});
+    }
+
+//    public static CompletableFuture<Void> getTaskRowSum (int[][] matrix) {
+//        return CompletableFuture.runAsync(() -> {
+//           Sum.rowSum(matrix);});
+//        List list;
+//        CompletableFuture<Void> result = Sum.rowSum(matrix).thenCombine(Sum.colSum(matrix),(r1,r2)-> list :: add );
+//
+//
+//    }
 }
 
 
