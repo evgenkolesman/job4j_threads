@@ -20,7 +20,9 @@ public class FindValueInArray extends RecursiveTask<Integer> {
     static int findMethod(int[] arr, int value) {
         var res = -1;
         if (arr.length == 1) {
-            return arr[0];
+            if (arr[0] == res) {
+                return arr[0];
+            }
         }
         for (var i = 0; i < arr.length; i++) {
             if (arr[i] == value) {

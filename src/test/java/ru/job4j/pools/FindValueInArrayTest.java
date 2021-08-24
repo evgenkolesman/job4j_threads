@@ -31,7 +31,7 @@ public class FindValueInArrayTest {
         for (int i = 0; i < 1; i++) {
             arr[i] = i;
         }
-        int val = 1;
+        int val = 0;
         assertThat(FindValueInArray.find(arr, val), is(0));
     }
 }
