@@ -10,21 +10,19 @@ public class FindValueInArray extends RecursiveTask<Integer> {
     private final int to;
     private final int from;
 
-    public FindValueInArray(int[] arr, int value, int to, int from) {
+    public FindValueInArray(int[] arr, int value, int from, int to) {
         this.arr = arr;
         this.value = value;
         this.to = to;
         this.from = from;
     }
 
-    static int findMethod(int[] arr, int value) {
+    public int findMethod(int from, int to) {
         var res = -1;
-        if (arr.length == 1) {
-            if (arr[0] == res) {
-                return arr[0];
-            }
+        if (from == to) {
+            return arr[0];
         }
-        for (var i = 0; i < arr.length; i++) {
+        for (var i = from; i <= to; i++) {
             if (arr[i] == value) {
                 res = i;
             }
@@ -34,12 +32,12 @@ public class FindValueInArray extends RecursiveTask<Integer> {
 
     @Override
     protected Integer compute() {
-        if (to - from <= 10) {
-            return findMethod(arr, value);
+        if (to - from < 10) {
+            return findMethod(from, to);
         }
-        int mid = (arr.length - 1) / 2;
-        FindValueInArray findValueInArray1 = new FindValueInArray(arr, value, to, mid);
-        FindValueInArray findValueInArray2 = new FindValueInArray(arr, value, mid + 1, from);
+        int mid = ((from + to) - 1) / 2;
+        FindValueInArray findValueInArray1 = new FindValueInArray(arr, value, from, mid);
+        FindValueInArray findValueInArray2 = new FindValueInArray(arr, value, mid + 1, to);
         findValueInArray1.fork();
         findValueInArray2.fork();
         return Math.max(findValueInArray1.join(), findValueInArray2.join());

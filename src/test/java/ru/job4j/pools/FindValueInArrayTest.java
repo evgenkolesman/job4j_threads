@@ -11,14 +11,13 @@ public class FindValueInArrayTest {
     public void whenLengthLessTen() {
         int[] arr = {1, 2, 3};
         int val = 3;
-
         assertThat(FindValueInArray.find(arr, val), is(2));
     }
 
     @Test
     public void whenLengthMoreTen() {
-        int[] arr = new int[12];
-        for (int i = 0; i < 12; i++) {
+        int[] arr = new int[30];
+        for (int i = 0; i < 30; i++) {
             arr[i] = i;
         }
         int val = 3;
