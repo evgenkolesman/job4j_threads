@@ -22,6 +22,16 @@ public class FindValueInArrayTest {
             arr[i] = i;
         }
         int val = 3;
-        assertThat(FindValueInArray.find(arr, val), is(2));
+        assertThat(FindValueInArray.find(arr, val), is(3));
+    }
+
+    @Test
+    public void whenOne() {
+        int[] arr = new int[1];
+        for (int i = 0; i < 1; i++) {
+            arr[i] = i;
+        }
+        int val = 1;
+        assertThat(FindValueInArray.find(arr, val), is(0));
     }
 }

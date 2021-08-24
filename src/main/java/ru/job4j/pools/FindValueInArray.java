@@ -19,6 +19,9 @@ public class FindValueInArray extends RecursiveTask<Integer> {
 
     static int findMethod(int[] arr, int value) {
         var res = -1;
+        if (arr.length == 1) {
+            return arr[0];
+        }
         for (var i = 0; i < arr.length; i++) {
             if (arr[i] == value) {
                 res = i;
@@ -29,7 +32,7 @@ public class FindValueInArray extends RecursiveTask<Integer> {
 
     @Override
     protected Integer compute() {
-        if (arr.length <= 10) {
+        if (to - from <= 10) {
             return findMethod(arr, value);
         }
         int mid = (arr.length - 1) / 2;
