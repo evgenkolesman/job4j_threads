@@ -3,9 +3,12 @@ package ru.job4j.pools;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 
+/**
+ * The example using ForkJoinPool
+ */
 public class FindValueInArray extends RecursiveTask<Integer> {
 
-    private final int arr[];
+    private final int[] arr;
     private final int value;
     private final int to;
     private final int from;
