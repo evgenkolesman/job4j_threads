@@ -25,6 +25,7 @@ public class FindValueInArray extends RecursiveTask<Integer> {
         for (var i = from; i <= to; i++) {
             if (arr[i] == value) {
                 res = i;
+                break;
             }
         }
         return res;
