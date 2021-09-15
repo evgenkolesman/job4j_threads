@@ -12,20 +12,28 @@ import java.util.concurrent.ExecutionException;
  */
 public class RolColSum {
     public static void main(String[] args) throws InterruptedException, ExecutionException {
-        int[][] matrix = new int[10][13];
-        for (int i = 0; i < matrix.length; i++) {
-            for (int z = 0; z < matrix[i].length; z++) {
-                matrix[i][z] = z;
+//        int[][] matrix = new int[10][13];
+//        for (int i = 0; i < matrix.length; i++) {
+//            for (int z = 0; z < matrix[i].length; z++) {
+//                matrix[i][z] = z;
+//            }
+//        }
+        int[][] matrix = new int[10000][10000];
+        for (int i = 0; i < 10000; i++) {
+            for (int j = 0; j < 10000; j++) {
+                matrix[i][j] = (i + 1) * (j + 1);
             }
         }
 
         RolColSum r = new RolColSum();
-
+        long start = System.currentTimeMillis();
         System.out.println(r.sumArr(colSum(matrix)));
         System.out.println(r.sumArr(rowSum(matrix)));
-
+        System.out.println(System.currentTimeMillis() - start);
+        long start2 = System.currentTimeMillis();
         System.out.println(r.getTaskColSum(matrix).get());
         System.out.println(r.getTaskRowSum(matrix).get());
+        System.out.println(System.currentTimeMillis() - start2);
     }
 
     public static Sum[] rowSum(int[][] matrix) {
