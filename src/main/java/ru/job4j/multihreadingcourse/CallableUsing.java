@@ -1,7 +1,5 @@
 package ru.job4j.multihreadingcourse;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
@@ -12,9 +10,6 @@ public class CallableUsing {
         FutureTask futureTask = new FutureTask(callable);
         new Thread(futureTask).start();
         System.out.println(futureTask.get());
-
-        Map map = new HashMap();
-
     }
 
     static class MyCall implements Callable<Integer> {
