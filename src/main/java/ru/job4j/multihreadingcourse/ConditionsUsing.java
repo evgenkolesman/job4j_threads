@@ -22,7 +22,7 @@ public class ConditionsUsing {
         @Override
         public void run() {
             lock.lock();
-            account +=10;
+            account += 10;
             condition.signal();
             lock.unlock();
         }
@@ -31,7 +31,7 @@ public class ConditionsUsing {
     static class AccountMinus extends Thread {
         @Override
         public void run() {
-            if ( account < 10) {
+            if (account < 10) {
                 try {
                     lock.lock();
                     System.out.println(account);
@@ -42,7 +42,7 @@ public class ConditionsUsing {
                     e.printStackTrace();
                 }
             }
-          account -= 10;
+            account -= 10;
         }
     }
 

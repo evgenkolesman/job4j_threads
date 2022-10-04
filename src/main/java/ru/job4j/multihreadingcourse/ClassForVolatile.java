@@ -1,9 +1,9 @@
 package ru.job4j.multihreadingcourse;
 
 public class ClassForVolatile {
-     static int i;
+    static int i;
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         Thread thread1 = new Thread() {
             @Override
             public void run() {
@@ -23,10 +23,10 @@ public class ClassForVolatile {
             public void run() {
                 int local = i;
                 while (i < 5) {
-                   if (local != i ) {
-                       System.out.println( " New value of i  " + i);
-                       local = i;
-                   }
+                    if (local != i) {
+                        System.out.println(" New value of i  " + i);
+                        local = i;
+                    }
                 }
             }
         };

@@ -26,13 +26,13 @@ public class ReentrantLockUsing {
 
     static class MyThread extends Thread {
         Resource resource;
+
         @Override
         public void run() {
             resource.changeI();
 //            resource.changeK();
         }
     }
-
 
 
 }
@@ -48,7 +48,7 @@ class Resource {
 
     void changeI() {
         lock.lock();
-        int i= this.i;
+        int i = this.i;
         if (Thread.currentThread().getName().equals("one")) {
             Thread.yield();
         }
@@ -59,7 +59,7 @@ class Resource {
     }
 
     void changeK() {
-        int k= this.k;
+        int k = this.k;
         if (Thread.currentThread().getName().equals("one")) {
             Thread.yield();
         }
@@ -69,7 +69,7 @@ class Resource {
 
     void changeS() {
 
-        int s= this.s;
+        int s = this.s;
         if (Thread.currentThread().getName().equals("one")) {
             Thread.yield();
         }
@@ -77,7 +77,6 @@ class Resource {
         this.s = s;
         lock.unlock();
     }
-
 
 
 }
