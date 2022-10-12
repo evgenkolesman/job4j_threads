@@ -31,7 +31,7 @@ public class CountShareMain {
         }
         List<Integer> collect = objects.stream().parallel().map(i -> i + 1).collect(Collectors.toList());
         List<Integer> collect1 = objects.parallelStream().map(i -> i + 1).collect(Collectors.toList());
-        collect.stream().parallel().forEachOrdered(System.out::print);//bad order because of parallel but can be fixed by forEachOrdered
+        collect.stream().parallel().forEachOrdered(System.out::print); //bad order because of parallel but can be fixed by forEachOrdered
 //        System.out.print(System.lineSeparator());
 //        collect.parallelStream().forEach(System.out::print);//bad order because of parallel
 //        System.out.print(System.lineSeparator());

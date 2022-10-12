@@ -3,6 +3,8 @@ package ru.job4j;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import ru.job4j.jackson.TypeReferenceMy;
+
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -12,20 +14,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 class SuperC<T> {
-    static {
-        System.out.println("SuperC Class is looked by JVM");
-    }
+    Class type;
     private final T t;
 
-//    public SuperC() {
-//        this((T) "empty value");
-//        System.out.println("empty value");
-//    }
 
-    public SuperC(T t){
+    public SuperC(T t) {
+        this(t, (Class<T>) t.getClass());
+    }
+
+    public SuperC(T t, Class<T> type) {
         this.t = t;
-        System.out.println("SuperC constructor is applied");
-}
+        type = type;
+        System.out.println("TYPE " + getType());
+    }
+
+    public Type getType() {
+        return type;
+    }
+
 
     @Override
     public String toString() {
@@ -39,6 +45,7 @@ interface Int<T> {
                 this.getClass().getGenericInterfaces()[0])
                 .getActualTypeArguments()[0];
     }
+
     default Type parameterizedTypeSuperClass() {
         return ((ParameterizedType)
                 this.getClass().getGenericSuperclass())
@@ -58,7 +65,8 @@ class B {
     }
 }
 
-class Z {}
+class Z {
+}
 
 class El extends SuperC<List<Z>> implements Int<List<B>> {
     public El(Z z) {
@@ -73,21 +81,20 @@ public class ForJacksonTraining {
 //        SuperC<B> bSuperC = new SuperC<>(new );
         ObjectMapper mapper = new ObjectMapper();
 //        El el = new El(new Z());
+        SuperC<String> bSuper = new SuperC<>("a");
+        ArrayList<String> strings = new ArrayList<>();
+        System.out.println((strings.getClass().getGenericSuperclass().getTypeName()));
+        Type genericSuperclass = strings.getClass().getGenericSuperclass();
         System.out.println("Starting readValue");
         String content = "{\"t\":\"any\"}";
-        SuperC<String> bSuper = mapper.readValue(content, new TypeReference<SuperC<String>>() {});
-//        Type genericSuperclass = bSuperC.getClass();
-//        genericSuperclass.getClass();
+
+
     }
 
     @Test
     void testJson() throws ClassNotFoundException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
         List<String> list = new ArrayList<String>();
-//        SuperC<B> bSuperC = new SuperC<>();
 
-
-//        System.out.println("Type interface is: " + new El().parameterizedInterfaceType());
-//        System.out.println("Type class is: " + new El().parameterizedTypeSuperClass());
         final Type actualTypeArgument = ((ParameterizedType) El.class.getGenericInterfaces()[0])
                 .getActualTypeArguments()[0];
         final Type actualTypeArgumentClass = ((ParameterizedType) El.class.getGenericSuperclass())
@@ -108,3 +115,17 @@ public class ForJacksonTraining {
         // --> Type is: ParameterizedStuff$Beer
     }
 }
+
+
+//    public SuperC(T t, Class type){
+//        Type superClass = this.getClass().getGenericSuperclass();
+//        if (superClass instanceof Class) {
+//            throw new IllegalArgumentException("Internal error: TypeReference constructed without actual type information");
+//        } else {
+//            this._type = ((ParameterizedType)superClass).getActualTypeArguments()[0];
+//        }
+//        this.t = t;
+//        System.out.println(_type.getTypeName());
+//        System.out.println("SuperC constructor is applied");
+//        _type = type;
+//        System.out.println(getType());
